@@ -1,13 +1,14 @@
 resource "aws_vpc" "spoonVPC" {
- cidr_block = "192.168.0.0/16"
+ cidr_block = "${var.vpc_cidr}"
  tags = {
-  Name = "spoonVPC"
+  Name = "${var.name}"
  }
 }
 
 resource "aws_subnet" "spoonPubA" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.0.0/24"
+ cidr_block = "${var.pub_sub_cidr[0]}"
+ availability_zone = "${var.avail_zones[0]}"
 
  tags = {
   Name = "spoonPubA"
@@ -16,8 +17,8 @@ resource "aws_subnet" "spoonPubA" {
 
 resource "aws_subnet" "spoonPubC" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.1.0/24"
- availability_zone = "ap-northeast-2c"
+ cidr_block = "${var.pub_sub_cidr[1]}"
+ availability_zone = "${var.avail_zones[1]}"
 
  tags = {
   Name = "spoonPubC"
@@ -26,8 +27,8 @@ resource "aws_subnet" "spoonPubC" {
 
 resource "aws_subnet" "spoonWebA" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.2.0/24"
- availability_zone = "ap-northeast-2a"
+ cidr_block = "${var.pri_sub_cidr[0]}"
+ availability_zone = "${var.avail_zones[0]}"
 
  tags = {
   Name = "spoonWebA"
@@ -36,8 +37,8 @@ resource "aws_subnet" "spoonWebA" {
 
 resource "aws_subnet" "spoonWebC" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.3.0/24"
- availability_zone = "ap-northeast-2c"
+ cidr_block = "${var.pri_sub_cidr[1]}"
+ availability_zone = "${var.avail_zones[1]}"
 
  tags = {
   Name = "spoonWebC"
@@ -46,8 +47,8 @@ resource "aws_subnet" "spoonWebC" {
 
 resource "aws_subnet" "spoonWasA" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.4.0/24"
- availability_zone = "ap-northeast-2a"
+ cidr_block = "${var.pri_sub_cidr[2]}"
+ availability_zone = "${var.avail_zones[0]}"
 
  tags = {
   Name = "spoonWasA"
@@ -56,8 +57,8 @@ resource "aws_subnet" "spoonWasA" {
 
 resource "aws_subnet" "spoonWasC" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.5.0/24"
- availability_zone = "ap-northeast-2c"
+ cidr_block = "${var.pri_sub_cidr[3]}"
+ availability_zone = "${var.avail_zones[1]}"
 
  tags = {
   Name = "spoonWasC"
@@ -66,8 +67,8 @@ resource "aws_subnet" "spoonWasC" {
 
 resource "aws_subnet" "spoonDBA" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.6.0/24"
- availability_zone = "ap-northeast-2a"
+ cidr_block = "${var.pri_sub_cidr[4]}"
+ availability_zone = "${var.avail_zones[0]}"
 
  tags = {
   Name = "spoonDBA"
@@ -76,8 +77,8 @@ resource "aws_subnet" "spoonDBA" {
 
 resource "aws_subnet" "spoonDBC" {
  vpc_id = "${aws_vpc.spoonVPC.id}"
- cidr_block = "192.168.7.0/24"
- availability_zone = "ap-northeast-2c"
+ cidr_block = "${var.pri_sub_cidr[5]}"
+ availability_zone = "${var.avail_zones[0]}"
 
  tags = {
   Name = "spoonDBC"

@@ -32,6 +32,10 @@ resource "aws_route_table_association" "spoonPubCAssoc" {
 resource "aws_route_table" "spoonPriA" {
   vpc_id = "${aws_vpc.spoonVPC.id}"
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.pubA-NAT.id}"
+  }
 
   tags = {
     Name = "spoonPriA"
@@ -55,6 +59,10 @@ resource "aws_route_table_association" "spoonPriADBAssoc" {
 resource "aws_route_table" "spoonPriC" {
   vpc_id = "${aws_vpc.spoonVPC.id}"
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = "${aws_nat_gateway.pubC-NAT.id}"
+  }
 
   tags = {
     Name = "spoonPriC"

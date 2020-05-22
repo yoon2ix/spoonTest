@@ -4,16 +4,18 @@ resource "aws_key_pair" "webServerKey" {
 }
 
 resource "aws_instance" "bestionHost" {
+
  ami = "ami-01288945bd24ed49a"
  instance_type = "t2.micro"
- subnet_id = "${module.vpc.spoonPubA-id}"
+ subnet_id = "${var.spoonPubA_id}"
  vpc_security_group_ids = [
-  "${module.aws-network-configs.pubSG-id}"
+  "${var.pubSG_id}"
  ]
- key_name = "${aws_key_pair.webServerKey}"
+ key_name = "${aws_key_pair.webServerKey.key_name}"
  count = 1
- tags {
+ associate_public_ip_address = true
+
+ tags = {
   Name = "bestionHost"
  }
- associate_public_ip_address = true
 }

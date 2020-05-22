@@ -1,3 +1,8 @@
+# VPC ID
+output "spoonVPC" {
+ value = "${aws_vpc.spoonVPC.id}"
+}
+
 # Subnet ID
 # Pub Subnet
 output "spoonPubA-id" {

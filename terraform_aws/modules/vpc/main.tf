@@ -3,6 +3,7 @@ resource "aws_vpc" "spoonVPC" {
  tags = {
   Name = "${var.name}"
  }
+ enable_dns_hostnames = "true"
 }
 
 resource "aws_subnet" "spoonPubA" {
@@ -100,6 +101,18 @@ resource "aws_security_group" "pubSG" {
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
  }
+ ingress {
+  from_port = 443
+  to_port = 443
+  protocol = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+ }
+ ingress {
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  cidr_blocks = ["0.0.0.0/0"]
+ }
 }
 
 resource "aws_security_group" "webServerSG" {
@@ -118,6 +131,12 @@ resource "aws_security_group" "webServerSG" {
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
  }
+ ingress {
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  cidr_blocks = ["0.0.0.0/0"]
+ }
 }
 
 resource "aws_security_group" "wasServerSG" {
@@ -128,13 +147,19 @@ resource "aws_security_group" "wasServerSG" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  security_groups = ["${aws_security_group.webServerSG.id}"]
+  cidr_blocks = ["0.0.0.0/0"]
  }
  ingress {
   from_port = 80
   to_port = 80
   protocol = "tcp"
   security_groups = ["${aws_security_group.webServerSG.id}"]
+ }
+ ingress {
+  from_port = -1
+  to_port = -1
+  protocol = "icmp"
+  cidr_blocks = ["0.0.0.0/0"]
  }
 }
 

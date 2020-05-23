@@ -64,3 +64,7 @@ output "dbServerSG-id" {
  value = "${aws_security_group.dbServerSG.id}"
 }
 
+# Availability Zones
+output "avail_zones" {
+ value = "${var.avail_zones}"
+}

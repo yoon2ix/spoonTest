@@ -1,2 +1,0 @@
-# spoonTest
-For Spoon Test

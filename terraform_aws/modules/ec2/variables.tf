@@ -62,3 +62,8 @@ variable "dbServerSG_id" {
  description = "Security Group for DB Server"
  type = "string"
 }
+
+variable "avail_zones" {
+ description = "AZ"
+ type = "list"
+}

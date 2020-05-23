@@ -113,6 +113,13 @@ resource "aws_security_group" "pubSG" {
   protocol = "icmp"
   cidr_blocks = ["0.0.0.0/0"]
  }
+
+ egress {
+   from_port   = 0
+   to_port     = 0
+   protocol    = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
 }
 
 resource "aws_security_group" "webServerSG" {
@@ -136,6 +143,12 @@ resource "aws_security_group" "webServerSG" {
   to_port = -1
   protocol = "icmp"
   cidr_blocks = ["0.0.0.0/0"]
+ }
+ egress {
+   from_port   = 0
+   to_port     = 0
+   protocol    = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
  }
 }
 
@@ -161,6 +174,12 @@ resource "aws_security_group" "wasServerSG" {
   protocol = "icmp"
   cidr_blocks = ["0.0.0.0/0"]
  }
+ egress {
+   from_port   = 0
+   to_port     = 0
+   protocol    = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
+ }
 }
 
 resource "aws_security_group" "dbServerSG" {
@@ -172,6 +191,12 @@ resource "aws_security_group" "dbServerSG" {
   to_port = 3306
   protocol = "tcp"
   security_groups = ["${aws_security_group.wasServerSG.id}"]
+ }
+ egress {
+   from_port   = 0
+   to_port     = 0
+   protocol    = "-1"
+   cidr_blocks = ["0.0.0.0/0"]
  }
 }
 

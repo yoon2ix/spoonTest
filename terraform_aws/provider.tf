@@ -26,6 +26,7 @@ module "ec2" {
  wasServerSG_id="${module.vpc.wasServerSG-id}"
  webServerSG_id="${module.vpc.webServerSG-id}"
  dbServerSG_id="${module.vpc.dbServerSG-id}"
+ avail_zones = ["${module.vpc.avail_zones[0]}","${module.vpc.avail_zones[1]}"]
 
 }
 

@@ -1,7 +1,7 @@
 ## Inputs
 
 | Name | Description | Type | Default |
-|------|-------------|:----:|:-----:|:-----:|
+|------|-------------|------|---------|
 | avail_zones | 사용할 availability zones 리스트 | list | - |
 | name | VPC Name | string | - |
 | pri_sub_cidr | Private Subnet CIDR Block 리스트 | list | - |
